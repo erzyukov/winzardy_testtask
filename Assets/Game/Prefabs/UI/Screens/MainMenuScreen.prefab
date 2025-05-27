@@ -58,6 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3686952575694714468}
   - component: {fileID: 6848360218916973745}
+  - component: {fileID: 5053207967166465647}
   m_Layer: 0
   m_Name: MainMenuScreen
   m_TagString: Untagged
@@ -98,6 +99,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectCharacterButton: {fileID: 9223003882620019153}
+--- !u!114 &5053207967166465647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6936003767763097805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7960e3856b206c4b9b624dda3a444df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonTransforms:
+  - {fileID: 4675369946589972314}
+  - {fileID: 4934436581617113563}
+  - {fileID: 3746845688885477985}
+  - {fileID: 3955580393426312792}
+  _buttonHiddenPosition: 150
+  _startAnimationDelay: 0.5
+  _buttonAnimationDelay: 0.2
+  _buttonAnimationDuration: 0.7
+  _defaultEase: 9
+  _lastElementEase: 30
 --- !u!1001 &3235803535161351189
 PrefabInstance:
   m_ObjectHideFlags: 0
