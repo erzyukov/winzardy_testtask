@@ -4,6 +4,6 @@
 
 	public class UIModel
 	{
-		public ReactiveProperty<EScreen> Screen = new();
+		public ReactiveProperty<EScreen> Screen = new( EScreen.MainMenu );
 	}
 }

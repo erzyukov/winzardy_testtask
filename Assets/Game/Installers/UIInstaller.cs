@@ -9,7 +9,35 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			// UIModel
-			Container.Bind<UIModel>()
+			Container
+				.Bind<UIModel>()
+				.AsSingle();
+
+			// UINavigator
+			Container
+				.BindInterfacesTo<UINavigator>()
+				.AsSingle();
+
+			// MainMenu
+
+			Container
+				.BindInterfacesTo<UIMainMenuScreenView>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UIMainMenuScreenPresenter>()
+				.AsSingle();
+
+			//CharactersSelect
+
+			Container
+				.BindInterfacesTo<UICharactersSelectScreenView>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UICharactersSelectScreenPresenter>()
 				.AsSingle();
 		}
 	}
