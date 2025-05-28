@@ -1,7 +1,7 @@
 ﻿namespace Game.UI
 {
 	using R3;
-	using System;
+
 
 	public class UICharactersSelectScreenPresenter : UiScreenPresenterBase<IUICharactersSelectScreenView>
 	{

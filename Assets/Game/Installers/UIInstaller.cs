@@ -1,7 +1,6 @@
 namespace Game.Installers
 {
 	using Game.UI;
-	using System;
 	using Zenject;
 
 
