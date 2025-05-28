@@ -1,15 +1,14 @@
 ﻿namespace Game.UI
 {
 	using R3;
-	using UnityEngine.UIElements;
 
 
 	public class UIMainMenuScreenPresenter : UiScreenPresenterBase<IUIMainMenuScreenView>
 	{
+		protected override EScreen Screen => EScreen.MainMenu;
+
 		public UIMainMenuScreenPresenter( IUIMainMenuScreenView view, UIModel model, IUINavigator navigator ) 
 			: base( view, model, navigator ) { }
-
-		protected override EScreen Screen => EScreen.MainMenu;
 
 		public override void Initialize()
 		{
@@ -23,6 +22,12 @@
 		private void OnSelectCharacterButtonClicked()
 		{
 			OpenScreen( EScreen.CharacterSelect );
+		}
+
+		protected override void OnClosed()
+		{
+			base.OnClosed();
+			View.BaseButtons.ForEach( b => b.ResetAnimation() );
 		}
 	}
 }

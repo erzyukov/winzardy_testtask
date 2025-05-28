@@ -28,6 +28,15 @@ namespace Game.UI
 			_halfButtonOverDuration = _buttonOverDuration * 0.5f;
 		}
 
+		public void ResetAnimation()
+		{
+			_downSequence.Complete();
+			_overSequence.Complete();
+
+			transform.localScale			= Vector3.one;
+			_iconTransform.localRotation	= Quaternion.identity;
+		}
+
 		public void OnPointerEnter( PointerEventData eventData )
 		{
 			_isPointerOver = true;

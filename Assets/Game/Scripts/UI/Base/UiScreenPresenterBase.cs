@@ -28,12 +28,26 @@
 		{
 			_model.Screen
 				.Select( s => s.Equals( Screen ) )
-				.Subscribe( v => View.SetActive( v ) )
+				.Subscribe( OnScreenActiveChange )
 				.AddTo( Disposables );
+		}
+
+		private void OnScreenActiveChange( bool isActive )
+		{
+			View.SetActive( isActive );
+
+			if (isActive) 
+				OnOpened();
+			else
+				OnClosed();
 		}
 
 		public virtual void Dispose() => Disposables.Dispose();
 
 		protected void OpenScreen( EScreen screen ) => _navigator.Open( screen );
+
+		protected virtual void OnOpened() { }
+
+		protected virtual void OnClosed() { }
 	}
 }

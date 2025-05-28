@@ -1,12 +1,20 @@
 namespace Game.Installers
 {
 	using Game.UI;
+	using System;
 	using Zenject;
 
 
 	public class UIInstaller : MonoInstaller
 	{
 		public override void InstallBindings()
+		{
+			Install_Core();
+			Install_Screens();
+			Install_Misc();
+		}
+
+		private void Install_Core()
 		{
 			// UIModel
 			Container
@@ -17,7 +25,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UINavigator>()
 				.AsSingle();
+		}
 
+		private void Install_Screens()
+		{
 			// MainMenu
 
 			Container
@@ -38,6 +49,15 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<UICharactersSelectScreenPresenter>()
+				.AsSingle();
+		}
+
+		private void Install_Misc()
+		{
+			//UISelectCharacterAnimator
+			Container
+				.BindInterfacesTo<UISelectCharacterAnimator>()
+				.FromComponentInHierarchy()
 				.AsSingle();
 		}
 	}
