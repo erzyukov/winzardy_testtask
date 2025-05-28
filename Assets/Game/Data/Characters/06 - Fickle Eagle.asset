@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd66af61cc230c645b7b12b9a91ee5fd, type: 3}
+  m_Name: 06 - Fickle Eagle
+  m_EditorClassIdentifier: 
+  _id: 1160973975
+  Name: Fickle Eagle
+  ExperienceToNextLevel: 2000
+  CurrentExperience: 1500
+  Icon: {fileID: 21300000, guid: 2d4b95844f9b18f4aab7659e63227eb2, type: 3}

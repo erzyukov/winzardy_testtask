@@ -12,3 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18ece827666ddd44a8fc0e5b01c9feb, type: 3}
   m_Name: CharactersConfig
   m_EditorClassIdentifier: 
+  Characters:
+  - {fileID: 11400000, guid: aa15a21b01fa4bb408563904d5c0a568, type: 2}
+  - {fileID: 11400000, guid: 1724dfc8c4883f147b581c60ad4f9d52, type: 2}
+  - {fileID: 11400000, guid: 4dd00fc1f1f3d5848a2fb4bd9b2fb5e0, type: 2}
+  - {fileID: 11400000, guid: 0c7e6d5179a195043ad1eddb69db05a4, type: 2}
+  - {fileID: 11400000, guid: dcaa5393c0b3d834bafa683e91dded9b, type: 2}
+  - {fileID: 11400000, guid: 90c3bc3f9300c874dbd1f70273f0731f, type: 2}
+  - {fileID: 11400000, guid: 2f3ecbc140de8134da669bcfe11ab699, type: 2}
+  - {fileID: 11400000, guid: 9d30e3ba4ab6812458ec6477fa3bb060, type: 2}
+  - {fileID: 11400000, guid: b92273444b96b6e41852eeb499400a53, type: 2}
+  - {fileID: 11400000, guid: 8fddae779a6b61b439d1f76e3566b36a, type: 2}

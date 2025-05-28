@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd66af61cc230c645b7b12b9a91ee5fd, type: 3}
+  m_Name: 03 - Icy Supernova
+  m_EditorClassIdentifier: 
+  _id: 3310747171
+  Name: Icy Supernova
+  ExperienceToNextLevel: 2500
+  CurrentExperience: 500
+  Icon: {fileID: 21300000, guid: 23a531692941b274091111a7d5e46478, type: 3}
