@@ -26,15 +26,28 @@ namespace Game.UI
 			_buttonTransforms.ForEach( b =>
 			{
 				_targetButtonPositions.Add( b.anchoredPosition.y );
-				b.anchoredPosition = b.anchoredPosition.WithY( _buttonHiddenPosition );
 
 				var button = b.GetComponent<Button>();
 				_buttons.Add( button );
-				button.interactable = false;
 			} );
 		}
 
-		private void Start()
+		private void OnEnable()
+		{
+			ResetAnimation();
+			PlayAnimation();
+		}
+
+		public void ResetAnimation()
+		{
+			_buttonTransforms.ForEach( b => 
+				b.anchoredPosition = b.anchoredPosition.WithY( _buttonHiddenPosition )
+			);
+
+			_buttons.ForEach( b => b.interactable = false );
+		}
+
+		private void PlayAnimation()
 		{
 			var sequence = Sequence.Create();
 			sequence.ChainDelay( _startAnimationDelay );
