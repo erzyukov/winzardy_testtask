@@ -10,6 +10,8 @@ namespace Game.UI
 	{
 		Observable<Unit> SelectButtonClicked { get; }
 		List<BaseButtonAnimation> BaseButtons { get; }
+
+		Transform CharacterListParent { get; }
 	}
 
 	public class UICharactersSelectScreenView : UiScreenViewBase, IUICharactersSelectScreenView
@@ -23,7 +25,8 @@ namespace Game.UI
 		
 		[SerializeField] private List<BaseButtonAnimation>		_baseButtons;
 
-		public Observable<Unit> SelectButtonClicked => _selectButton.OnClickAsObservable();
-		public List<BaseButtonAnimation> BaseButtons => _baseButtons;
+		public Observable<Unit> SelectButtonClicked		=> _selectButton.OnClickAsObservable();
+		public List<BaseButtonAnimation> BaseButtons	=> _baseButtons;
+		public Transform CharacterListParent			=> _characterListParent;
 	}
 }

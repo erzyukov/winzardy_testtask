@@ -1,13 +1,20 @@
 ﻿namespace Game.UI
 {
+	using Game.Configs;
+	using Game.Utilities;
 	using R3;
+	using System.Collections.Generic;
+	using UnityEngine;
 
 
 	public class UICharactersSelectScreenPresenter : UiScreenPresenterBase<IUICharactersSelectScreenView>
 	{
 		protected override EScreen Screen => EScreen.CharacterSelect;
 
-		private readonly IUISelectCharacterAnimator _animator;
+		private readonly IUISelectCharacterAnimator		_animator;
+		private readonly CharactersConfig				_config;
+
+		private Dictionary<uint, IUICharacterElement>		_characters = new();
 
 #region Constructor
 
@@ -15,24 +22,27 @@
 			IUICharactersSelectScreenView view, 
 			UIModel model, 
 			IUINavigator navigator,
-			IUISelectCharacterAnimator animator
+			IUISelectCharacterAnimator animator,
+			CharactersConfig config
 		) 
 			: base( view, model, navigator )
 		{
-			_animator = animator;
+			_animator	= animator;
+			_config		= config;
 		}
 
 #endregion
 
 		public override void Initialize()
 		{
+			FillCharacterList();
+			_animator.ResetAnimation();
+
 			base.Initialize();
 
 			View.SelectButtonClicked
 				.Subscribe( _ => OnSelectButtonClicked() )
 				.AddTo( Disposables );
-
-			_animator.ResetAnimation();
 		}
 
 		protected override void OnOpened()
@@ -51,6 +61,35 @@
 		private void OnSelectButtonClicked()
 		{
 			OpenScreen( EScreen.MainMenu );
+		}
+
+		private void FillCharacterList()
+		{
+			View.CharacterListParent.DestroyChildren();
+			_config.Characters.ForEach( c =>
+			{
+				IUICharacterElement character = GameObject.Instantiate( _config.CharacterElementPrefab, View.CharacterListParent );
+				character.SetIcon( c.Icon );
+				character.SetExperience( (float) c.CurrentExperience / c.ExperienceToNextLevel );
+				character.SelectButtonClicked
+					.Subscribe( _ => OnSelectButtonClicked( c.Id ) )
+					.AddTo( Disposables );
+			
+				_characters.Add( c.Id, character );
+			} );
+		}
+
+		private void OnSelectButtonClicked( uint id )
+		{
+            foreach (var item in _characters)
+				item.Value.SetSelected( item.Key == id );
+
+			ShowSelectedCharacterInfo( id );
+		}
+
+		private void ShowSelectedCharacterInfo( uint id )
+		{
+			
 		}
 	}
 }

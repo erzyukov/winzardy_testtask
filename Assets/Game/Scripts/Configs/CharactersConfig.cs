@@ -1,5 +1,6 @@
 ﻿namespace Game.Configs
 {
+	using Game.UI;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -8,6 +9,8 @@
 	[CreateAssetMenu( fileName = "CharactersConfig", menuName = "Configs/Characters/CharactersConfig", order = (int)EConfig.Characters )]
 	public class CharactersConfig : ScriptableObject
 	{
+		public UICharacterElement CharacterElementPrefab;
+		
 		public List<CharacterConfig> Characters;
 
 		public CharacterConfig GetCharacter( uint id )
