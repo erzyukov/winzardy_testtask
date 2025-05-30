@@ -1,6 +1,7 @@
 ﻿namespace Game.UI
 {
 	using Game.Configs;
+	using Game.Core;
 	using Game.Utilities;
 	using R3;
 	using System.Collections.Generic;
@@ -13,6 +14,7 @@
 
 		private readonly IUISelectCharacterAnimator		_animator;
 		private readonly CharactersConfig				_config;
+		private readonly GameModel						_gameModel;
 
 		private Dictionary<uint, IUICharacterElement>		_characters = new();
 
@@ -23,15 +25,19 @@
 			UIModel model, 
 			IUINavigator navigator,
 			IUISelectCharacterAnimator animator,
-			CharactersConfig config
+			CharactersConfig config,
+			GameModel gameModel
 		) 
 			: base( view, model, navigator )
 		{
 			_animator	= animator;
 			_config		= config;
+			_gameModel	= gameModel;
 		}
 
 #endregion
+
+#region UiScreenPresenterBase
 
 		public override void Initialize()
 		{
@@ -43,12 +49,24 @@
 			View.SelectButtonClicked
 				.Subscribe( _ => OnSelectButtonClicked() )
 				.AddTo( Disposables );
+
+			_gameModel.SelectedCharacterId
+				.Select( v => v != 0 )
+				.Subscribe( OnChangedSelectedCharacter )
+				.AddTo( Disposables );
 		}
 
 		protected override void OnOpened()
 		{
 			base.OnOpened();
-			_animator.StartOpenScreenAnimation( null );
+
+			if (_gameModel.SelectedCharacterId.Value == 0)
+			{
+				_animator.StartOpenScreenInfoAnimation();
+				_animator.StartOpenScreenListAnimation();
+			}
+			else
+				RunCharacterSelectedAnimation();
 		}
 
 		protected override void OnClosed()
@@ -57,6 +75,8 @@
 			View.BaseButtons.ForEach( b => b.ResetAnimation() );
 			_animator.ResetAnimation();
 		}
+
+#endregion
 
 		private void OnSelectButtonClicked()
 		{
@@ -87,9 +107,38 @@
 			ShowSelectedCharacterInfo( id );
 		}
 
+		private void OnChangedSelectedCharacter( bool isSelected )
+		{
+			View.SetSelectButtonInteractive( isSelected );
+			View.SetExperienceActive( isSelected );
+		}
+
 		private void ShowSelectedCharacterInfo( uint id )
 		{
-			
+			if (_gameModel.SelectedCharacterId.Value == id)
+				return;
+
+			_gameModel.SelectedCharacterId.Value = id;
+
+			var config = _config.GetCharacter( id );
+
+			var experienceRatio = (float) config.CurrentExperience / config.ExperienceToNextLevel;
+			_animator.RunChangeCharacterAnimation( experienceRatio, config.CurrentExperience, () =>
+			{
+				View.SetName( config.Name );
+				View.SetIcon( config.Icon );
+				View.SetExperienceMax( config.ExperienceToNextLevel );
+			} );
+		}
+
+		private void RunCharacterSelectedAnimation()
+		{
+			var config = _config.GetCharacter( _gameModel.SelectedCharacterId.Value );
+
+			var experienceRatio = (float) config.CurrentExperience / config.ExperienceToNextLevel;
+			_animator.RunCharacterSelectedAnimation( experienceRatio, config.CurrentExperience, true );
+
+			_animator.StartOpenScreenListAnimation();
 		}
 	}
 }
